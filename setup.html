@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setup.php | Static View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="page">
+        <h1>setup.php</h1>
+        <p>Static view of the setup file</p>
+        <p>This page shows the code and output for creating the database and tables.</p>
+
+        <section class="section">
+            <h2>Code</h2>
+            <details open>
+                <summary>Show code</summary>
+                <pre class="code-block"><code>&lt;?php
+$conn = mysqli_connect("localhost", "root", "");
+
+mysqli_query($conn, "CREATE DATABASE IF NOT EXISTS company_db");
+mysqli_select_db($conn, "company_db");
+
+mysqli_query($conn," 
+CREATE TABLE Employees(
+emp_id INT PRIMARY KEY,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+age INT,
+salary DECIMAL(10,2),
+city VARCHAR(50)
+)");
+
+mysqli_query($conn," 
+CREATE TABLE Projects(
+proj_id INT PRIMARY KEY,
+emp_id INT,
+proj_name VARCHAR(100),
+budget DECIMAL(10,2),
+hours INT
+)");
+
+echo "Tables Created!";
+?&gt;</code></pre>
+            </details>
+            <div class="output-box">
+                <strong>Output:</strong>
+                <p>Tables Created!</p>
+            </div>
+        </section>
+
+        <a class="back-link" href="index.html">Back to Home</a>
+    </main>
+</body>
+</html>

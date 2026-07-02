@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Laboratory 1 | Company Database</title>
+	<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+	<main class="page">
+		<h1>Laboratory 1</h1>
+		<p>Company Database Learning Page</p>
+
+		<p>This page shows the code, expected output, and table data in a step-by-step format for learning and review.</p>
+
+		<section class="section hero-section">
+			<h2>Step-by-step guide</h2>
+			<div class="step-grid">
+				<article class="step-card">
+					<span class="step-number">1</span>
+					<h3>Connection</h3>
+					<p>Review the database connection file first.</p>
+				</article>
+				<article class="step-card">
+					<span class="step-number">2</span>
+					<h3>Setup</h3>
+					<p>See how the database and tables are created.</p>
+				</article>
+				<article class="step-card">
+					<span class="step-number">3</span>
+					<h3>Insert</h3>
+					<p>Check the sample employee and project rows.</p>
+				</article>
+				<article class="step-card">
+					<span class="step-number">4</span>
+					<h3>Tables</h3>
+					<p>Inspect the Employees and Projects table data.</p>
+				</article>
+				<article class="step-card">
+					<span class="step-number">5</span>
+					<h3>Questions</h3>
+					<p>Learn each SQL query with its expected output.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Quick Links</h2>
+			<div class="links">
+				<a href="#db">Database Connection</a>
+				<a href="#setup">Create Tables</a>
+				<a href="#insert">Insert Sample Data</a>
+				<a href="#tables">View Database Tables</a>
+				<a href="#questions">Question Walkthrough</a>
+			</div>
+		</section>
+
+		<section class="section" id="db">
+			<h2>db.php</h2>
+			<p class="section-note">This file opens the MySQL connection.</p>
+			<details open>
+				<summary>Show code</summary>
+				<pre class="code-block"><code>&lt;?php
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "company_db";
+
+$conn = mysqli_connect($host, $user, $password, $database);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?&gt;</code></pre>
+			</details>
+			<div class="output-box">
+				<strong>Output:</strong>
+				<p>No visible output. It only creates the database connection.</p>
+			</div>
+		</section>
+
+		<section class="section" id="setup">
+			<h2>setup.php</h2>
+			<p class="section-note">This file creates the database and tables.</p>
+			<details open>
+				<summary>Show code</summary>
+				<pre class="code-block"><code>&lt;?php
+$conn = mysqli_connect("localhost", "root", "");
+
+mysqli_query($conn, "CREATE DATABASE IF NOT EXISTS company_db");
+mysqli_select_db($conn, "company_db");
+
+mysqli_query($conn," 
+CREATE TABLE Employees(
+emp_id INT PRIMARY KEY,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+age INT,
+salary DECIMAL(10,2),
+city VARCHAR(50)
+)");
+
+mysqli_query($conn," 
+CREATE TABLE Projects(
+proj_id INT PRIMARY KEY,
+emp_id INT,
+proj_name VARCHAR(100),
+budget DECIMAL(10,2),
+hours INT
+)");
+
+echo "Tables Created!";
+?&gt;</code></pre>
+			</details>
+			<div class="output-box">
+				<strong>Output:</strong>
+				<p>Tables Created!</p>
+			</div>
+		</section>
+
+		<section class="section" id="insert">
+			<h2>insert.php</h2>
+			<p class="section-note">This file inserts the sample employee and project records.</p>
+			<details open>
+				<summary>Show code</summary>
+				<pre class="code-block"><code>&lt;?php
+include "db.php";
+
+mysqli_query($conn,"INSERT INTO Employees VALUES
+(1,'Alice','Smith',28,55000.50,'Manila'),
+(2,'Bob','Jones',34,42000.75,'Cebu'),
+(3,'Charlie','Brown',22,38000.00,'Davao'),
+(4,'Diana','Prince',29,60000.25,'Manila'),
+(5,'Evan','Wright',45,75000.90,'Cebu')
+");
+
+mysqli_query($conn,"INSERT INTO Projects VALUES
+(101,1,'Website Redesign',15000,120),
+(102,2,'Mobile App',25000,200),
+(103,1,'Database Migration',30000,150),
+(104,6,'Cloud Setup',40000,300),
+(105,NULL,'Security Audit',10000,50)
+");
+
+echo "Data Inserted!";
+?&gt;</code></pre>
+			</details>
+			<div class="output-box">
+				<strong>Output:</strong>
+				<p>Data Inserted!</p>
+			</div>
+		</section>
+
+		<section class="section" id="tables">
+			<h2>Database Tables</h2>
+			<p class="section-note">This static section shows the sample rows stored in the Employees and Projects tables.</p>
+
+			<div class="table-layout">
+				<article class="table-card">
+					<h3>Employees</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Age</th>
+								<th>Salary</th>
+								<th>City</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>1</td><td>Alice</td><td>Smith</td><td>28</td><td>55000.50</td><td>Manila</td></tr>
+							<tr><td>2</td><td>Bob</td><td>Jones</td><td>34</td><td>42000.75</td><td>Cebu</td></tr>
+							<tr><td>3</td><td>Charlie</td><td>Brown</td><td>22</td><td>38000.00</td><td>Davao</td></tr>
+							<tr><td>4</td><td>Diana</td><td>Prince</td><td>29</td><td>60000.25</td><td>Manila</td></tr>
+							<tr><td>5</td><td>Evan</td><td>Wright</td><td>45</td><td>75000.90</td><td>Cebu</td></tr>
+						</tbody>
+					</table>
+				</article>
+
+				<article class="table-card">
+					<h3>Projects</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Project ID</th>
+								<th>Employee ID</th>
+								<th>Project Name</th>
+								<th>Budget</th>
+								<th>Hours</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>101</td><td>1</td><td>Website Redesign</td><td>15000</td><td>120</td></tr>
+							<tr><td>102</td><td>2</td><td>Mobile App</td><td>25000</td><td>200</td></tr>
+							<tr><td>103</td><td>1</td><td>Database Migration</td><td>30000</td><td>150</td></tr>
+							<tr><td>104</td><td>6</td><td>Cloud Setup</td><td>40000</td><td>300</td></tr>
+							<tr><td>105</td><td>NULL</td><td>Security Audit</td><td>10000</td><td>50</td></tr>
+						</tbody>
+					</table>
+				</article>
+			</div>
+		</section>
+
+		<section class="section" id="questions">
+			<h2>Questions 1-10</h2>
+			<p class="section-note">Each exercise now shows the SQL query first, then the PHP wrapper, then the expected output.</p>
+
+			<details open>
+				<summary>1. Display the complete name of all employees in uppercase.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT UPPER(CONCAT(first_name,' ',last_name)) AS fullname FROM Employees;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "SELECT UPPER(CONCAT(first_name,' ',last_name)) AS fullname FROM Employees";
+$result = mysqli_query($conn,$sql);
+
+while($row=mysqli_fetch_assoc($result)){
+    echo $row['fullname']."&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">ALICE SMITH
+BOB JONES
+CHARLIE BROWN
+DIANA PRINCE
+EVAN WRIGHT</pre></div>
+			</details>
+
+			<details open>
+				<summary>2. Determine the youngest and oldest employee.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT MIN(age) AS youngest, MAX(age) AS oldest FROM Employees;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "SELECT MIN(age) AS youngest, MAX(age) AS oldest FROM Employees";
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
+
+echo "Youngest: " . $row['youngest'] . "&lt;br&gt;";
+echo "Oldest: " . $row['oldest'];
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Youngest: 22
+Oldest: 45</pre></div>
+			</details>
+
+			<details open>
+				<summary>3. Find the location (position) of the letter 'a' in each employee's first name.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT first_name, LOCATE('a', first_name) AS position FROM Employees;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "SELECT first_name, LOCATE('a', first_name) AS position FROM Employees";
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['first_name'] . " - " . $row['position'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Alice - 0
+Bob - 0
+Charlie - 3
+Diana - 3
+Evan - 3</pre></div>
+			</details>
+
+			<details open>
+				<summary>4. Display employee salaries rounded to one decimal place.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT first_name, ROUND(salary,1) AS salary FROM Employees;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "SELECT first_name, ROUND(salary,1) AS salary FROM Employees";
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['first_name'] . " - " . $row['salary'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Alice - 55000.5
+Bob - 42000.8
+Charlie - 38000.0
+Diana - 60000.3
+Evan - 75000.9</pre></div>
+			</details>
+
+			<details open>
+				<summary>5. Determine whether each employee's age is odd or even.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT first_name, age,
+CASE
+    WHEN age % 2 = 0 THEN 'Even'
+    ELSE 'Odd'
+END AS type
+FROM Employees;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "SELECT first_name, age,
+CASE
+    WHEN age % 2 = 0 THEN 'Even'
+    ELSE 'Odd'
+END AS type
+FROM Employees";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['first_name'] . " (" . $row['age'] . ") - " . $row['type'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Alice (28) - Even
+Bob (34) - Even
+Charlie (22) - Even
+Diana (29) - Odd
+Evan (45) - Odd</pre></div>
+			</details>
+
+			<details open>
+				<summary>6. List all employee IDs from both tables, including duplicates.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT emp_id FROM Employees
+UNION ALL
+SELECT emp_id FROM Projects;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "
+SELECT emp_id FROM Employees
+UNION ALL
+SELECT emp_id FROM Projects
+";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['emp_id'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">1
+2
+3
+4
+5
+1
+2
+1
+6
+(blank line for NULL)</pre></div>
+			</details>
+
+			<details open>
+				<summary>7. Show employees and their assigned projects.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT e.first_name, e.last_name, p.proj_name
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "
+SELECT e.first_name, e.last_name, p.proj_name
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id
+";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['first_name'] . " " . $row['last_name'] . " - " . $row['proj_name'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Alice Smith - Website Redesign
+Bob Jones - Mobile App
+Alice Smith - Database Migration</pre></div>
+			</details>
+
+			<details open>
+				<summary>8. Show all employees and their projects. Format the employee's last name to a fixed width.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT e.first_name,
+LPAD(e.last_name,10,'*') AS last_name,
+p.proj_name
+FROM Employees e
+LEFT JOIN Projects p ON e.emp_id = p.emp_id;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "
+SELECT e.first_name,
+LPAD(e.last_name,10,'*') AS last_name,
+p.proj_name
+FROM Employees e
+LEFT JOIN Projects p ON e.emp_id = p.emp_id
+";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['first_name'] . " " . $row['last_name'] . " - " . $row['proj_name'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Alice *****Smith - Website Redesign
+Alice *****Smith - Database Migration
+Bob *****Jones - Mobile App
+Charlie *****Brown - 
+Diana ****Prince - 
+Evan ****Wright - </pre></div>
+			</details>
+
+			<details open>
+				<summary>9. Find employee IDs that appear in both the Employees and Projects tables.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT DISTINCT e.emp_id
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "
+SELECT DISTINCT e.emp_id
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id
+";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['emp_id'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">1
+2</pre></div>
+			</details>
+
+			<details open>
+				<summary>10. Find the total project hours per city.</summary>
+				<div class="code-label">Step 1: SQL Query</div>
+				<pre class="code-block sql-block"><code>SELECT e.city, SUM(p.hours) AS total_hours
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id
+GROUP BY e.city;</code></pre>
+				<div class="code-label">Step 2: PHP Wrapper</div>
+				<pre class="code-block php-block"><code>&lt;?php
+include "../db.php";
+
+$sql = "
+SELECT e.city, SUM(p.hours) AS total_hours
+FROM Employees e
+INNER JOIN Projects p ON e.emp_id = p.emp_id
+GROUP BY e.city
+";
+
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo $row['city'] . " - " . $row['total_hours'] . "&lt;br&gt;";
+}
+?&gt;</code></pre>
+				<div class="output-box"><strong>Output:</strong><pre class="output-block">Manila - 270
+Cebu - 200</pre></div>
+			</details>
+		</section>
+
+		<a class="back-link" href="../../index.html">Back to root static page</a>
+	</main>
+</body>
+</html>

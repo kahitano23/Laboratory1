@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>db.php | Static View</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="page">
+        <h1>db.php</h1>
+        <p>Static view of the database connection file</p>
+        <p>This page shows the code and the learning note for the database connection file.</p>
+
+        <section class="section">
+            <h2>Code</h2>
+            <details open>
+                <summary>Show code</summary>
+                <pre class="code-block"><code>&lt;?php
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "company_db";
+
+$conn = mysqli_connect($host, $user, $password, $database);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?&gt;</code></pre>
+            </details>
+            <div class="output-box">
+                <strong>Output:</strong>
+                <p>No visible output. It only creates the database connection.</p>
+            </div>
+        </section>
+
+        <a class="back-link" href="index.html">Back to Home</a>
+    </main>
+</body>
+</html>
