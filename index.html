@@ -3,10 +3,71 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="refresh" content="0; url=Website/homepage/page.html">
-	<title>Laboratory 1 | Redirecting</title>
+	<title>Laboratory 1 + Laboratory 2 | Static Hub</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<p>Redirecting to the main lesson page. If you are not redirected automatically, open <a href="Website/homepage/page.html">Website/homepage/page.html</a>.</p>
+	<main class="page landing-page hub-page">
+		<section class="landing-hero hub-hero">
+			<div class="landing-copy">
+				<div class="landing-kicker">Static Study Hub</div>
+				<h1>Laboratory 1 and 2</h1>
+				<p>
+					A single clean page for both labs, arranged to stay readable on Vercel and easy to extend when the next assignment is added.
+				</p>
+			</div>
+
+			<aside class="landing-panel">
+				<div>
+					<h2>Why this layout</h2>
+					<p class="section-note">One hub, two lab cards, and no scattered scaffolding. Lab 1 stays complete, and Lab 2 has a reserved place beside it.</p>
+				</div>
+			</aside>
+		</section>
+
+		<section class="lab-grid" aria-label="Laboratory overview">
+			<article class="lab-card">
+				<div class="lab-card-head">
+					<div>
+						<p class="lab-label">Laboratory 1</p>
+						<h2>Company Database Lesson</h2>
+					</div>
+					<p class="lab-summary">Complete static lesson page with code, outputs, tables, and question walkthroughs.</p>
+				</div>
+
+				<div class="landing-actions">
+					<a class="landing-button primary" href="Website/homepage/page.html">Open Lab 1</a>
+					<a class="landing-button secondary" href="Website/homepage/page.html#questions">Questions</a>
+				</div>
+
+				<div class="landing-links lab-links">
+					<a href="Website/homepage/page.html#db">Database Connection</a>
+					<a href="Website/homepage/page.html#setup">Create Tables</a>
+					<a href="Website/homepage/page.html#insert">Insert Sample Data</a>
+					<a href="Website/homepage/page.html#tables">Database Tables</a>
+				</div>
+			</article>
+
+			<article class="lab-card" id="lab2">
+				<div class="lab-card-head">
+					<div>
+						<p class="lab-label">Laboratory 2</p>
+						<h2>Reserved Workspace</h2>
+					</div>
+					<p class="lab-summary">Placeholder structure that matches Lab 1, ready for the next assignment without a new scaffold.</p>
+				</div>
+
+				<div class="landing-actions">
+					<a class="landing-button primary" href="#lab2">Lab 2 Area</a>
+					<a class="landing-button secondary" href="#lab2">Reserved for the next lab</a>
+				</div>
+
+				<div class="landing-links lab-links">
+					<a href="#lab2">Single-page workspace</a>
+					<a href="#lab2">Matches the current layout</a>
+				</div>
+			</article>
+		</section>
+	</main>
 </body>
 </html>
